@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folk Williams Financial Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --o-50:#E8F4F5; --o-100:#C5E2E5; --o-200:#9ECFD4; --o-300:#76BBC2; --o-400:#58AAB3; --o-500:#0097A7; --o-600:#00838F; --o-700:#006F7A; --o-800:#005A63; --o-900:#00464D; --o-950:#002529;
+    --w-50:#FDFCFA; --w-100:#F7F5F0; --w-200:#F0EBE0; --w-300:#E8DFD0; --w-400:#D4C8B5; --w-500:#B5A58C; --w-600:#9A8B73; --w-700:#7A6D5A; --w-800:#5C5243;
+    --c-900:#0D1117; --c-800:#161B22; --c-700:#4A5568; --c-600:#6B7280; --c-500:#9CA3AF; --c-400:#E5E7EB; --white:#FFFFFF;
+    --fd:'Cormorant Garamond',Georgia,serif; --fb:'Inter',system-ui,sans-serif; --fm:'Space Grotesk',monospace;
+    --ease:cubic-bezier(0.22,1,0.36,1); --ease-out:cubic-bezier(0.16,1,0.3,1);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+  body{font-family:var(--fb);font-size:15px;line-height:1.65;color:var(--c-900);background:var(--white);overflow-x:hidden;font-weight:400}
+  img{max-width:100%;height:auto;display:block}
+  a{text-decoration:none;color:inherit}
+  ul{list-style:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+  /* ============================================
+     NAVIGATION — BOLD & SUBSTANTIAL
+     ============================================ */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 48px;height:84px;display:flex;align-items:center;justify-content:space-between;transition:all 0.6s var(--ease);border-bottom:1px solid transparent}
+  .nav.scrolled{background:rgba(255,255,255,0.92);backdrop-filter:blur(24px) saturate(180%);border-bottom-color:var(--c-400);box-shadow:0 1px 0 rgba(0,0,0,0.04);height:72px}
+  .nav-logo{display:flex;align-items:center;gap:16px}
+  .nav-logo img{height:44px;width:auto;display:block}
+  .nav-logo span{font-family:var(--fd);font-size:26px;font-weight:500;letter-spacing:-0.01em;color:var(--c-900);line-height:1}
+  .nav-links{display:flex;align-items:center;gap:48px}
+  .nav-links a{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--c-900);padding:8px 0;position:relative;transition:color 0.3s ease}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--o-600);transition:width 0.5s var(--ease)}
+  .nav-links a:hover{color:var(--o-700)}
+  .nav-links a:hover::after{width:100%}
+  .nav-cta{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:14px 32px;border:2px solid var(--c-900);border-radius:100px;color:var(--c-900);transition:all 0.4s var(--ease);background:transparent;line-height:1}
+  .nav-cta:hover{background:var(--c-900);color:var(--white);border-color:var(--c-900);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer;z-index:1001}
+  .nav-toggle span{display:block;width:26px;height:2px;background:var(--c-900);transition:all 0.4s var(--ease);border-radius:1px}
+  .nav-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.active span:nth-child(2){opacity:0;transform:scaleX(0)}
+  .nav-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  .mob-overlay{position:fixed;inset:0;z-index:999;background:var(--w-50);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;opacity:0;pointer-events:none;transition:opacity 0.5s var(--ease)}
+  .mob-overlay.active{opacity:1;pointer-events:auto}
+  .mob-overlay a{font-family:var(--fd);font-size:36px;font-weight:500;color:var(--c-900);letter-spacing:-0.01em;transition:color 0.3s}
+  .mob-overlay a:hover{color:var(--o-600)}
+  .mob-overlay .nav-cta{margin-top:20px;font-size:14px;padding:16px 40px}
+
+  /* ============================================
+     HERO — CINEMATIC & BOLD
+     ============================================ */
+  .hero{position:relative;width:100%;min-height:100vh;display:flex;align-items:flex-end;padding:0 48px 120px;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0;background:url('../images/hero-premium.jpg') center 30% / cover no-repeat;transform:scale(1.1);will-change:transform}
+  .hero-grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+  .hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(247,245,240,0.05) 0%,rgba(247,245,240,0.6) 50%,rgba(247,245,240,0.95) 100%)}
+  .hero-content{position:relative;z-index:3;max-width:900px;padding-top:200px}
+  .hero-label{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--o-700);margin-bottom:28px;display:flex;align-items:center;gap:16px}
+  .hero-label::before{content:'';width:48px;height:2px;background:var(--o-600)}
+  .hero-title{font-family:var(--fd);font-size:clamp(52px,9vw,120px);font-weight:500;line-height:0.92;letter-spacing:-0.03em;color:var(--c-900);margin-bottom:36px;text-wrap:balance}
+  .hero-title em{font-style:italic;font-weight:400;color:var(--o-700)}
+  .hero-sub{font-family:var(--fb);font-size:clamp(15px,1.3vw,18px);font-weight:400;color:var(--c-700);max-width:520px;line-height:1.7;margin-bottom:48px;text-wrap:pretty}
+  .hero-cta{display:inline-flex;align-items:center;gap:14px;font-family:var(--fm);font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:18px 40px;background:var(--c-900);color:var(--white);border-radius:100px;transition:all 0.5s var(--ease);border:2px solid var(--c-900);line-height:1}
+  .hero-cta:hover{transform:translateY(-3px);box-shadow:0 24px 48px rgba(0,0,0,0.18);background:var(--c-800)}
+  .hero-scroll{position:absolute;bottom:40px;right:48px;z-index:3;font-family:var(--fm);font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--c-600);display:flex;flex-direction:column;align-items:center;gap:10px}
+  .hero-scroll::after{content:'';width:1px;height:56px;background:linear-gradient(to bottom,var(--c-600),transparent);animation:scrollPulse 2.5s ease-in-out infinite}
+  @keyframes scrollPulse{0%,100%{opacity:0.25;transform:scaleY(0.5)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* ============================================
+     INTRO — EDITORIAL & ASYMMETRIC
+     ============================================ */
+  .intro{padding:180px 48px 140px;background:var(--white)}
+  .intro-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:100px;align-items:start}
+  .intro-label{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--o-600);margin-bottom:40px;display:flex;align-items:center;gap:16px}
+  .intro-label::before{content:'';width:40px;height:2px;background:var(--o-400)}
+  .intro-headline{font-family:var(--fd);font-size:clamp(36px,4.5vw,64px);font-weight:500;line-height:1.05;letter-spacing:-0.02em;color:var(--c-900);text-wrap:balance;margin-bottom:40px}
+  .intro-headline em{font-style:italic;font-weight:400;color:var(--o-700)}
+  .intro-body{font-family:var(--fb);font-size:16px;font-weight:400;color:var(--c-700);line-height:1.8;max-width:460px}
+  .intro-visual{position:relative;margin-top:60px}
+  .intro-visual img{width:100%;border-radius:2px;aspect-ratio:3/4;object-fit:cover;filter:grayscale(15%) contrast(1.03);transition:filter 0.8s ease}
+  .intro-visual:hover img{filter:grayscale(0%) contrast(1)}
+  .intro-quote{position:absolute;bottom:-32px;left:-48px;max-width:340px;font-family:var(--fd);font-size:26px;font-style:italic;font-weight:500;line-height:1.35;color:var(--o-700);background:var(--white);padding:28px 36px;box-shadow:0 24px 64px rgba(0,0,0,0.08);border-radius:2px}
+
+  /* ============================================
+     TAX — CINEMATIC DEEP DIVE
+     ============================================ */
+  .tax{position:relative;padding:180px 48px;background:var(--w-100);overflow:hidden}
+  .tax-bg{position:absolute;top:-5%;right:-5%;width:55%;height:110%;border-radius:2px;overflow:hidden;opacity:0.6}
+  .tax-bg img{width:100%;height:100%;object-fit:cover;filter:grayscale(35%) contrast(1.1)}
+  .tax-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;position:relative;z-index:2}
+  .tax-label{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--o-600);margin-bottom:32px}
+  .tax-title{font-family:var(--fd);font-size:clamp(44px,5.5vw,80px);font-weight:500;line-height:0.95;letter-spacing:-0.02em;color:var(--c-900);margin-bottom:32px;text-wrap:balance}
+  .tax-title em{font-style:italic;font-weight:400;color:var(--o-700)}
+  .tax-desc{font-family:var(--fb);font-size:16px;font-weight:400;color:var(--c-700);line-height:1.8;max-width:500px;margin-bottom:40px}
+  .tax-cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--c-900);border-bottom:2px solid var(--c-900);padding-bottom:4px;transition:all 0.4s var(--ease)}
+  .tax-cta:hover{gap:16px;color:var(--o-700);border-bottom-color:var(--o-700)}
+  .tax-features{display:flex;flex-direction:column;gap:20px;margin-top:56px}
+  .tax-f{display:flex;gap:16px;align-items:baseline}
+  .tax-f-num{font-family:var(--fm);font-size:11px;font-weight:500;color:var(--o-400);letter-spacing:0.1em;min-width:24px}
+  .tax-f-text{font-family:var(--fb);font-size:15px;font-weight:400;color:var(--c-700);line-height:1.6}
+  .tax-right{display:flex;justify-content:flex-end;align-items:center}
+  .tax-badge{display:inline-flex;align-items:center;gap:12px;background:var(--white);padding:18px 32px;border-radius:100px;font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--c-700);box-shadow:0 12px 40px rgba(0,0,0,0.06);border:1px solid var(--w-200)}
+  .tax-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--o-500);animation:pulse 2.5s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+
+  /* ============================================
+     SERVICES — BOLD PAIR
+     ============================================ */
+  .services{padding:0 48px 160px;background:var(--white)}
+  .services-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:2px solid var(--w-200)}
+  .svc-card{padding:100px 64px;border-bottom:2px solid var(--w-200);position:relative;overflow:hidden;transition:background 0.6s ease;min-height:520px;display:flex;flex-direction:column}
+  .svc-card:first-child{border-right:2px solid var(--w-200)}
+  .svc-card:hover{background:var(--w-50)}
+  .svc-label{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-600);margin-bottom:36px}
+  .svc-title{font-family:var(--fd);font-size:clamp(32px,3.5vw,52px);font-weight:500;line-height:1.05;letter-spacing:-0.02em;color:var(--c-900);margin-bottom:28px;text-wrap:balance}
+  .svc-title em{font-style:italic;font-weight:400;color:var(--o-700)}
+  .svc-desc{font-family:var(--fb);font-size:16px;font-weight:400;color:var(--c-700);line-height:1.7;max-width:440px;margin-bottom:48px;flex-grow:1}
+  .svc-link{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--c-900);display:inline-flex;align-items:center;gap:10px;transition:gap 0.4s var(--ease)}
+  .svc-link:hover{gap:16px;color:var(--o-700)}
+  .svc-link svg{width:18px;height:18px;transition:transform 0.4s var(--ease)}
+  .svc-link:hover svg{transform:translateX(4px)}
+  .svc-img{position:absolute;top:50%;right:-60px;width:260px;height:180px;border-radius:2px;object-fit:cover;opacity:0;transform:translateY(-50%) scale(0.95);filter:grayscale(25%);transition:all 0.6s var(--ease);pointer-events:none}
+  .svc-card:hover .svc-img{opacity:0.55;transform:translateY(-50%) scale(1)}
+
+  /* ============================================
+     PATHING — INTERACTIVE CENTERPIECE
+     ============================================ */
+  .pathing{background:var(--o-950);color:var(--white);position:relative;overflow:hidden;min-height:100vh}
+  .pathing-grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+  .pathing-glow{position:absolute;top:-15%;right:-8%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(0,151,167,0.14) 0%,transparent 60%);pointer-events:none;z-index:0}
+  .pathing-inner{max-width:1400px;margin:0 auto;padding:160px 48px;display:grid;grid-template-columns:1fr 1.4fr;gap:100px;align-items:center;min-height:100vh;position:relative;z-index:2}
+  .pathing-label{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--o-300);margin-bottom:36px}
+  .pathing-title{font-family:var(--fd);font-size:clamp(40px,4.5vw,72px);font-weight:500;line-height:1.0;letter-spacing:-0.02em;color:var(--white);margin-bottom:72px;text-wrap:balance}
+  .pathing-title em{font-style:italic;font-weight:400;color:var(--o-200)}
+  .pathing-list{display:flex;flex-direction:column;gap:0}
+  .pathing-item{font-family:var(--fd);font-size:clamp(26px,2.8vw,40px);font-weight:400;color:rgba(255,255,255,0.3);cursor:pointer;padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.08);transition:all 0.5s var(--ease);letter-spacing:-0.01em;line-height:1.2;display:flex;align-items:center;gap:20px;position:relative}
+  .pathing-item::before{content:attr(data-num);font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--o-500);transition:color 0.4s;min-width:28px}
+  .pathing-item:hover,.pathing-item.active{color:var(--white);padding-left:16px}
+  .pathing-item.active{font-weight:500}
+  .pathing-item:hover::before,.pathing-item.active::before{color:var(--o-300)}
+  .pathing-item .arr{opacity:0;transform:translateX(-8px);transition:all 0.4s var(--ease);font-family:var(--fm);font-size:14px}
+  .pathing-item:hover .arr,.pathing-item.active .arr{opacity:1;transform:translateX(0)}
+  .pathing-right{position:relative;height:580px}
+  .pathing-panel{position:absolute;inset:0;border-radius:2px;overflow:hidden;opacity:0;transition:opacity 0.9s var(--ease),transform 0.9s var(--ease);transform:scale(1.02);z-index:1}
+  .pathing-panel.active{opacity:1;transform:scale(1);z-index:2}
+  .pathing-panel img{width:100%;height:100%;object-fit:cover;filter:brightness(0.55) contrast(1.12)}
+  .pathing-desc{position:absolute;bottom:0;left:0;right:0;padding:48px;background:linear-gradient(to top,rgba(0,37,41,0.92) 0%,transparent 100%);z-index:3}
+  .pathing-desc-title{font-family:var(--fd);font-size:32px;font-weight:500;margin-bottom:14px;line-height:1.15}
+  .pathing-desc-title em{font-style:italic;font-weight:400}
+  .pathing-desc-body{font-family:var(--fb);font-size:15px;font-weight:400;color:var(--c-500);line-height:1.7;max-width:460px}
+  .pathing-desc-link{display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--o-200);transition:gap 0.4s}
+  .pathing-desc-link:hover{gap:14px;color:var(--white)}
+
+  /* ============================================
+     INSIGHTS — MAGAZINE EDITORIAL
+     ============================================ */
+  .insights{padding:160px 48px;background:var(--white)}
+  .insights-head{max-width:1400px;margin:0 auto 100px;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+  .insights-label{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-600);margin-bottom:20px}
+  .insights-title{font-family:var(--fd);font-size:clamp(36px,4.5vw,64px);font-weight:500;line-height:1.05;letter-spacing:-0.02em}
+  .insights-all{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--c-900);border-bottom:2px solid var(--c-900);padding-bottom:4px;transition:all 0.4s}
+  .insights-all:hover{color:var(--o-700);border-bottom-color:var(--o-700)}
+  .insights-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:56px}
+  .insights-feat{position:relative;border-radius:2px;overflow:hidden;aspect-ratio:4/3;display:block}
+  .insights-feat img{width:100%;height:100%;object-fit:cover;transition:transform 0.9s var(--ease)}
+  .insights-feat:hover img{transform:scale(1.03)}
+  .insights-feat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,17,23,0.85) 0%,rgba(13,17,23,0.25) 50%,transparent 100%);padding:48px;display:flex;flex-direction:column;justify-content:flex-end;transition:background 0.4s}
+  .insights-feat:hover .insights-feat-overlay{background:linear-gradient(to top,rgba(13,17,23,0.9) 0%,rgba(13,17,23,0.35) 60%,transparent 100%)}
+  .insights-feat-tag{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--o-300);margin-bottom:16px}
+  .insights-feat-title{font-family:var(--fd);font-size:clamp(26px,2.5vw,40px);font-weight:500;line-height:1.12;margin-bottom:14px;letter-spacing:-0.01em}
+  .insights-feat-excerpt{font-family:var(--fb);font-size:15px;font-weight:400;color:var(--c-500);line-height:1.6;max-width:440px}
+  .insights-side{display:flex;flex-direction:column;gap:36px}
+  .insights-item{display:grid;grid-template-columns:120px 1fr;gap:28px;align-items:start;transition:transform 0.5s var(--ease)}
+  .insights-item:hover{transform:translateX(8px)}
+  .insights-item-thumb{width:120px;height:90px;border-radius:2px;object-fit:cover;filter:grayscale(20%);transition:filter 0.4s}
+  .insights-item:hover .insights-item-thumb{filter:grayscale(0%)}
+  .insights-item-tag{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--c-600);margin-bottom:10px}
+  .insights-item-title{font-family:var(--fd);font-size:22px;font-weight:500;line-height:1.25;margin-bottom:10px;letter-spacing:-0.01em;transition:color 0.3s}
+  .insights-item:hover .insights-item-title{color:var(--o-700)}
+  .insights-item-date{font-family:var(--fb);font-size:13px;color:var(--c-600)}
+
+  /* ============================================
+     CONTACT CTA — DARK & COMMANDING
+     ============================================ */
+  .cta-contact{position:relative;padding:200px 48px;background:var(--o-950);color:var(--white);text-align:center;overflow:hidden}
+  .cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(0,151,167,0.1) 0%,transparent 60%);pointer-events:none}
+  .cta-inner{position:relative;z-index:2;max-width:800px;margin:0 auto}
+  .cta-label{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--o-300);margin-bottom:36px}
+  .cta-title{font-family:var(--fd);font-size:clamp(48px,7vw,96px);font-weight:500;line-height:0.95;letter-spacing:-0.03em;margin-bottom:36px;text-wrap:balance}
+  .cta-title em{font-style:italic;font-weight:400;color:var(--o-200)}
+  .cta-body{font-family:var(--fb);font-size:17px;font-weight:400;color:var(--c-500);max-width:520px;margin:0 auto 56px;line-height:1.7}
+  .cta-btn{display:inline-flex;align-items:center;gap:14px;font-family:var(--fm);font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:20px 48px;background:var(--white);color:var(--c-900);border-radius:100px;transition:all 0.5s var(--ease);border:2px solid var(--white);line-height:1}
+  .cta-btn:hover{transform:translateY(-3px);box-shadow:0 24px 64px rgba(0,0,0,0.35);background:var(--w-50)}
+  .cta-meta{margin-top:72px;font-family:var(--fb);font-size:14px;color:var(--c-600)}
+  .cta-meta a{color:var(--o-300);border-bottom:1px solid var(--o-700);transition:all 0.3s;padding-bottom:1px}
+  .cta-meta a:hover{color:var(--white);border-bottom-color:var(--white)}
+
+  /* ============================================
+     FOOTER — SUBSTANTIAL & PREMIUM
+     ============================================ */
+  .footer{padding:140px 48px 64px;background:var(--c-900);color:var(--c-500)}
+  .footer-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:100px;margin-bottom:100px}
+  .footer-brand{max-width:340px}
+  .footer-logo{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .footer-logo img{height:40px;width:auto}
+  .footer-logo-text{font-family:var(--fd);font-size:24px;font-weight:500;color:var(--white);letter-spacing:-0.01em}
+  .footer-desc{font-family:var(--fb);font-size:15px;font-weight:400;line-height:1.7;color:var(--c-600)}
+  .footer-col-title{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);margin-bottom:28px}
+  .footer-col-links{display:flex;flex-direction:column;gap:14px}
+  .footer-col-links a{font-family:var(--fb);font-size:15px;font-weight:400;color:var(--c-600);transition:color 0.3s}
+  .footer-col-links a:hover{color:var(--white)}
+  .footer-bottom{max-width:1400px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.08);padding-top:40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+  .footer-legal{font-family:var(--fb);font-size:13px;color:var(--c-600)}
+  .footer-legal a{color:var(--c-600);text-decoration:none;margin-left:28px;transition:color 0.3s}
+  .footer-legal a:hover{color:var(--white)}
+
+  /* ============================================
+     ANIMATIONS & REVEALS
+     ============================================ */
+  .rv{opacity:0;transform:translateY(60px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+  .rv.vis{opacity:1;transform:translateY(0)}
+  .rv-d1{transition-delay:0.12s} .rv-d2{transition-delay:0.24s} .rv-d3{transition-delay:0.36s} .rv-d4{transition-delay:0.48s}
+  .rv-s{opacity:0;transform:scale(0.96);transition:opacity 1.2s var(--ease),transform 1.2s var(--ease)}
+  .rv-s.vis{opacity:1;transform:scale(1)}
+  .rv-l{opacity:0;transform:translateX(-50px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  .rv-l.vis{opacity:1;transform:translateX(0)}
+  .rv-r{opacity:0;transform:translateX(50px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  .rv-r.vis{opacity:1;transform:translateX(0)}
+
+  /* ============================================
+     RESPONSIVE — TABLET
+     ============================================ */
+  @media(max-width:1024px){
+    .nav{padding:0 32px;height:76px}
+    .nav.scrolled{height:68px}
+    .nav-links,.nav-cta{display:none}
+    .nav-toggle{display:flex}
+    .hero{padding:0 32px 80px;min-height:90vh}
+    .hero-content{padding-top:160px}
+    .hero-scroll{display:none}
+    .intro{padding:120px 32px 100px}
+    .intro-grid{grid-template-columns:1fr;gap:60px}
+    .intro-quote{position:relative;bottom:auto;left:auto;margin-top:-24px;margin-left:32px;max-width:100%}
+    .tax{padding:120px 32px}
+    .tax-content{grid-template-columns:1fr;gap:60px}
+    .tax-bg{width:100%;height:300px;top:auto;bottom:0;opacity:0.25;position:relative}
+    .services{padding:0 32px 120px}
+    .services-grid{grid-template-columns:1fr}
+    .svc-card:first-child{border-right:none}
+    .svc-card{padding:60px 40px;min-height:auto}
+    .svc-img{display:none}
+    .pathing-inner{grid-template-columns:1fr;padding:120px 32px;min-height:auto;gap:60px}
+    .pathing-right{height:400px}
+    .pathing-title{margin-bottom:48px}
+    .insights{padding:120px 32px}
+    .insights-grid{grid-template-columns:1fr}
+    .insights-head{margin-bottom:60px}
+    .cta-contact{padding:140px 32px}
+    .footer{padding:100px 32px 48px}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:60px}
+  }
+
+  /* ============================================
+     RESPONSIVE — MOBILE
+     ============================================ */
+  @media(max-width:640px){
+    .nav{padding:0 24px;height:72px}
+    .nav-logo img{height:36px}
+    .nav-logo span{font-size:22px}
+    .hero{padding:0 24px 60px}
+    .hero-content{padding-top:140px}
+    .hero-title{font-size:clamp(40px,12vw,52px)}
+    .hero-sub{font-size:15px}
+    .hero-cta{padding:16px 32px;font-size:12px}
+    .intro{padding:80px 24px 60px}
+    .intro-headline{font-size:clamp(30px,8vw,36px)}
+    .intro-quote{padding:20px 24px;font-size:20px;margin-left:16px}
+    .tax{padding:80px 24px}
+    .tax-title{font-size:clamp(36px,10vw,44px)}
+    .tax-features{margin-top:36px}
+    .services{padding:0 24px 80px}
+    .svc-card{padding:48px 24px}
+    .svc-title{font-size:clamp(28px,7vw,32px)}
+    .pathing-inner{padding:80px 24px}
+    .pathing-item{font-size:clamp(22px,6vw,28px);padding:16px 0}
+    .pathing-desc{padding:28px}
+    .pathing-desc-title{font-size:24px}
+    .pathing-right{height:320px}
+    .insights{padding:80px 24px}
+    .insights-feat-overlay{padding:28px}
+    .insights-feat-title{font-size:clamp(22px,6vw,26px)}
+    .insights-item{grid-template-columns:1fr;gap:16px}
+    .insights-item-thumb{width:100%;height:180px}
+    .cta-contact{padding:100px 24px}
+    .cta-title{font-size:clamp(40px,10vw,48px)}
+    .cta-btn{padding:16px 32px}
+    .footer{padding:80px 24px 40px}
+    .footer-grid{grid-template-columns:1fr;gap:48px}
+    .footer-bottom{flex-direction:column;align-items:flex-start;gap:16px}
+    .footer-legal a{margin-left:0;margin-right:20px}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    .rv,.rv-s,.rv-l,.rv-r{opacity:1;transform:none;transition:none}
+    .hero-bg{transform:none!important}
+    .hero-scroll::after{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+   NAVIGATION
+   ============================================ -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="../images/logo-original.jpg" alt="Folk Williams Financial Management">
+    <span>Folk Williams</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Client Portal</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mob-overlay" id="mobOverlay">
+  <a href="index.html#services">Services</a>
+  <a href="insights.html">Insights</a>
+  <a href="index.html#about">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="nav-cta">Client Portal</a>
+</div>
+
+<!-- ============================================
+   HERO
+   ============================================ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-label rv">Financial Management</p>
+    <h1 class="hero-title rv rv-d1">Warmth in<br><em>precision.</em></h1>
+    <p class="hero-sub rv rv-d2">We steward wealth with the rigor of an institution and the empathy of a trusted partner. From individual tax filing to multi-generational family office architecture.</p>
+    <a href="#services" class="hero-cta rv rv-d3">Explore Our Practice</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ============================================
+   INTRODUCTION
+   ============================================ -->
+<section class="intro" id="about">
+  <div class="intro-grid">
+    <div>
+      <p class="intro-label rv">Since 1958</p>
+      <h2 class="intro-headline rv rv-d1">We build financial infrastructure for <em>lives in motion.</em></h2>
+      <p class="intro-body rv rv-d2">Folk Williams began as Williams Tax Service in 1958. Today, we are a comprehensive financial management firm serving individuals, growing entities, and high-net-worth families with the same care our founder brought to his first client.</p>
+    </div>
+    <div class="intro-visual rv-s">
+      <img src="../images/editorial-still.jpg" alt="Warm editorial detail">
+      <div class="intro-quote">"From individual tax filing to multi-generational family office architecture."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+   TAX PREPARATION
+   ============================================ -->
+<section class="tax" id="tax">
+  <div class="tax-bg">
+    <img src="../images/editorial-still.jpg" alt="">
+  </div>
+  <div class="tax-content">
+    <div>
+      <p class="tax-label rv">Tax Preparation</p>
+      <h2 class="tax-title rv rv-d1">For <em>everyone.</em><br>Without exception.</h2>
+      <p class="tax-desc rv rv-d2">Our institutional-grade tax preparation is not gated by wealth tier. We serve first-time filers, gig-economy professionals, multi-income households, and retirees with the same rigor, attention, and human care.</p>
+      <a href="tax-preparation.html" class="tax-cta rv rv-d3">Start Your Filing →</a>
+      <div class="tax-features">
+        <div class="tax-f rv rv-d1"><span class="tax-f-num">01</span><span class="tax-f-text">Secure digital document collection — encrypted end-to-end, mobile-native.</span></div>
+        <div class="tax-f rv rv-d2"><span class="tax-f-num">02</span><span class="tax-f-text">Deduction maximization audit that catches what automated software misses.</span></div>
+        <div class="tax-f rv rv-d3"><span class="tax-f-num">03</span><span class="tax-f-text">Year-round advisory, not just seasonal. Questions in October are welcome.</span></div>
+        <div class="tax-f rv rv-d4"><span class="tax-f-num">04</span><span class="tax-f-text">Transparent flat-fee pricing. No surprise hourly charges, ever.</span></div>
+      </div>
+    </div>
+    <div class="tax-right rv-r">
+      <div class="tax-badge"><span class="tax-badge-dot"></span> Open to All Backgrounds</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+   SERVICES — PAIR
+   ============================================ -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <article class="svc-card rv-l">
+      <p class="svc-label">For Growing Entities</p>
+      <h3 class="svc-title">Strategic<br><em>Accounting.</em></h3>
+      <p class="svc-desc">Robust bookkeeping, entity structuring, and financial reporting for businesses and individuals building something that lasts. Clean books, strategic insight, scalable systems.</p>
+      <a href="accounting.html" class="svc-link">Explore Accounting →</a>
+      <img src="../images/hero-architecture.jpg" alt="" class="svc-img">
+    </article>
+    <article class="svc-card rv-r">
+      <p class="svc-label">High-Touch Advisory</p>
+      <h3 class="svc-title">Premium Business<br><em>Management.</em></h3>
+      <p class="svc-desc">An exclusive advisory ecosystem for high-profile individuals and high-net-worth families. Multi-stream revenue, equity compensation, and legacy preservation.</p>
+      <a href="business-management.html" class="svc-link">Enter the Ecosystem →</a>
+      <img src="../images/texture-oceanic.jpg" alt="" class="svc-img">
+    </article>
+  </div>
+</section>
+
+<!-- ============================================
+   INTERACTIVE PATHING
+   ============================================ -->
+<section class="pathing" id="management">
+  <div class="pathing-grain"></div>
+  <div class="pathing-glow"></div>
+  <div class="pathing-inner">
+    <div>
+      <p class="pathing-label rv">Premium Business Management</p>
+      <h2 class="pathing-title rv rv-d1">Which path<br><em>reflects your life?</em></h2>
+      <div class="pathing-list" id="pathList">
+        <div class="pathing-item active" data-arc="elite" data-num="01">Elite Performers <span class="arr">→</span></div>
+        <div class="pathing-item" data-arc="corporate" data-num="02">Corporate Leaders <span class="arr">→</span></div>
+        <div class="pathing-item" data-arc="wealth" data-num="03">Wealth Creators <span class="arr">→</span></div>
+        <div class="pathing-item" data-arc="legacy" data-num="04">Legacy Planners <span class="arr">→</span></div>
+      </div>
+    </div>
+    <div class="pathing-right rv-s">
+      <div class="pathing-panel active" data-arc="elite">
+        <img src="../images/archetype-elite.jpg" alt="Elite Performers">
+        <div class="pathing-desc">
+          <h3 class="pathing-desc-title">Elite <em>Performers</em></h3>
+          <p class="pathing-desc-body">Athletes, entertainers, and creators managing multi-stream revenue, endorsement complexities, and empire-building transitions across jurisdictions.</p>
+          <a href="business-management.html#elite" class="pathing-desc-link">Explore →</a>
+        </div>
+      </div>
+      <div class="pathing-panel" data-arc="corporate">
+        <img src="../images/archetype-corporate.jpg" alt="Corporate Leaders">
+        <div class="pathing-desc">
+          <h3 class="pathing-desc-title">Corporate <em>Leaders</em></h3>
+          <p class="pathing-desc-body">C-Suite executives optimizing equity compensation, RSU vesting schedules, deferred income, and corporate benefit coordination.</p>
+          <a href="business-management.html#corporate" class="pathing-desc-link">Explore →</a>
+        </div>
+      </div>
+      <div class="pathing-panel" data-arc="wealth">
+        <img src="../images/archetype-wealth.jpg" alt="Wealth Creators">
+        <div class="pathing-desc">
+          <h3 class="pathing-desc-title">Wealth <em>Creators</em></h3>
+          <p class="pathing-desc-body">Founders navigating business-to-personal transitions, exit events, liquidity planning, and capital reinvestment architecture.</p>
+          <a href="business-management.html#wealth" class="pathing-desc-link">Explore →</a>
+        </div>
+      </div>
+      <div class="pathing-panel" data-arc="legacy">
+        <img src="../images/archetype-legacy.jpg" alt="Legacy Planners">
+        <div class="pathing-desc">
+          <h3 class="pathing-desc-title">Legacy <em>Planners</em></h3>
+          <p class="pathing-desc-body">Multi-generational families preserving wealth across decades. Trust architecture, stewardship education, and family office dynamics.</p>
+          <a href="business-management.html#legacy" class="pathing-desc-link">Explore →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+   INSIGHTS
+   ============================================ -->
+<section class="insights" id="insights">
+  <div class="insights-head">
+    <div>
+      <p class="insights-label rv">Insights Hub</p>
+      <h2 class="insights-title rv rv-d1">Market commentary.<br>Institutional perspective.</h2>
+    </div>
+    <a href="insights.html" class="insights-all rv rv-d2">View All →</a>
+  </div>
+  <div class="insights-grid">
+    <a href="insights.html" class="insights-feat rv-s">
+      <img src="../images/texture-oceanic.jpg" alt="Abstract texture">
+      <div class="insights-feat-overlay">
+        <span class="insights-feat-tag">Tax Strategy</span>
+        <h3 class="insights-feat-title">The Mid-Year Tax Review: Why July Is Your Strategic Window</h3>
+        <p class="insights-feat-excerpt">Most taxpayers wait until December. By then, the moves that matter are already off the table.</p>
+      </div>
+    </a>
+    <div class="insights-side">
+      <a href="insights.html" class="insights-item rv-l">
+        <img src="../images/hero-architecture.jpg" alt="Architecture" class="insights-item-thumb">
+        <div>
+          <p class="insights-item-tag">Business</p>
+          <h4 class="insights-item-title">Entity Restructuring for the Modern Founder</h4>
+          <p class="insights-item-date">May 2026</p>
+        </div>
+      </a>
+      <a href="insights.html" class="insights-item rv-l rv-d1">
+        <img src="../images/editorial-still.jpg" alt="Still life" class="insights-item-thumb">
+        <div>
+          <p class="insights-item-tag">Family Office</p>
+          <h4 class="insights-item-title">Stewardship Without Entitlement</h4>
+          <p class="insights-item-date">April 2026</p>
+        </div>
+      </a>
+      <a href="insights.html" class="insights-item rv-l rv-d2">
+        <img src="../images/hero-premium.jpg" alt="Premium" class="insights-item-thumb">
+        <div>
+          <p class="insights-item-tag">Wealth</p>
+          <h4 class="insights-item-title">The QSBS Checklist: Are You Leaving Gains on the Table?</h4>
+          <p class="insights-item-date">March 2026</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+   CONTACT CTA
+   ============================================ -->
+<section class="cta-contact" id="contact">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <p class="cta-label rv">Begin the Conversation</p>
+    <h2 class="cta-title rv rv-d1">Let us steward<br><em>what you have built.</em></h2>
+    <p class="cta-body rv rv-d2">Whether you are filing a single return or designing a multi-generational trust, the first step is a simple conversation. No pressure. No obligation.</p>
+    <a href="contact.html" class="cta-btn rv rv-d3">Schedule a Consultation</a>
+    <p class="cta-meta rv rv-d4">Secure portal access via <a href="https://www.schwab.com" target="_blank">Charles Schwab</a> and <a href="https://www.fidelity.com" target="_blank">Fidelity</a> integrations.</p>
+  </div>
+</section>
+
+<!-- ============================================
+   FOOTER
+   ============================================ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="../images/logo-original.jpg" alt="Folk Williams">
+        <span class="footer-logo-text">Folk Williams</span>
+      </div>
+      <p class="footer-desc">Premier financial management for individuals, growing entities, and high-net-worth families. Warmth in precision. Clarity in every ledger.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Services</p>
+      <div class="footer-col-links">
+        <a href="tax-preparation.html">Tax Preparation</a>
+        <a href="accounting.html">Strategic Accounting</a>
+        <a href="business-management.html">Business Management</a>
+        <a href="contact.html">Family Office</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Resources</p>
+      <div class="footer-col-links">
+        <a href="insights.html">Insights Hub</a>
+        <a href="contact.html">Client Portal</a>
+        <a href="contact.html">Document Collection</a>
+        <a href="https://www.schwab.com" target="_blank">Schwab Access</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Contact</p>
+      <div class="footer-col-links">
+        <a href="contact.html">Schedule a Call</a>
+        <a href="mailto:hello@folkwilliams.com">hello@folkwilliams.com</a>
+        <a href="tel:+15551234567">(555) 123-4567</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-legal">© 2026 Folk Williams Financial Management. All rights reserved.</p>
+    <p class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></p>
+  </div>
+</footer>
+
+<!-- ============================================
+   SCRIPTS
+   ============================================ -->
+<script>
+  // Intersection Observer for scroll reveals
+  const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:0.08,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.rv,.rv-s,.rv-l,.rv-r').forEach(el=>obs.observe(el));
+
+  // Nav scroll state
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{if(window.scrollY>80)nav.classList.add('scrolled');else nav.classList.remove('scrolled')},{passive:true});
+
+  // Hero parallax
+  const hBg=document.getElementById('heroBg');
+  window.addEventListener('scroll',()=>{if(hBg){const y=window.scrollY*0.25;hBg.style.transform='translateY('+y+'px) scale(1.1)'}},{passive:true});
+
+  // Mobile menu
+  const toggle=document.getElementById('navToggle');
+  const overlay=document.getElementById('mobOverlay');
+  toggle.addEventListener('click',()=>{toggle.classList.toggle('active');overlay.classList.toggle('active');document.body.style.overflow=overlay.classList.contains('active')?'hidden':''});
+  overlay.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{toggle.classList.remove('active');overlay.classList.remove('active');document.body.style.overflow=''}));
+
+  // Pathing tool
+  const pItems=document.querySelectorAll('.pathing-item');
+  const pPanels=document.querySelectorAll('.pathing-panel');
+  pItems.forEach(item=>{
+    item.addEventListener('mouseenter',()=>{const arc=item.dataset.arc;pItems.forEach(i=>i.classList.toggle('active',i.dataset.arc===arc));pPanels.forEach(p=>p.classList.toggle('active',p.dataset.arc===arc))});
+    item.addEventListener('click',()=>{const arc=item.dataset.arc;pItems.forEach(i=>i.classList.toggle('active',i.dataset.arc===arc));pPanels.forEach(p=>p.classList.toggle('active',p.dataset.arc===arc))});
+  });
+</script>
+</body>
+</html>

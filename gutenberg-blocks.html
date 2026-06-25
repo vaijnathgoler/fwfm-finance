@@ -1,0 +1,291 @@
+<!--
+  ============================================
+  FOLK WILLIAMS FINANCIAL MANAGEMENT
+  Gutenberg Block Templates (Custom HTML Block)
+  ============================================
+
+  INSTRUCTIONS:
+  1. Upload fwfm-theme.css to your theme directory (e.g., /wp-content/themes/your-theme/fwfm/)
+  2. Enqueue the stylesheet via functions.php (see README.md)
+  3. Add a "Custom HTML" block in Gutenberg for each section below.
+  4. Paste the HTML. Adjust image URLs to your Media Library paths.
+  5. For the full page, chain multiple Custom HTML blocks in sequence.
+
+  Note: All CSS classes are prefixed with fw- to avoid conflicts.
+-->
+
+<!-- ========================================== -->
+<!-- 1. NAVIGATION (Add to Site Header / Template Part) -->
+<!-- ========================================== -->
+<nav class="fw-site-nav" id="fwMainNav">
+  <div class="fw-container">
+    <a href="/" class="fw-nav-logo">
+      <svg class="fw-nav-logo-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M25 15 h15 v25 c0 20 -10 30 -15 35 v-60 Z" fill="#007A8A"/>
+        <path d="M42.5 15 h15 v50 c0 15 -5 20 -15 20 v-70 Z" fill="#007A8A"/>
+        <path d="M60 15 h15 v25 c0 20 -10 30 -15 35 v-60 Z" fill="#007A8A"/>
+      </svg>
+      <span class="fw-nav-logo-text">Folk Williams</span>
+    </a>
+    <ul class="fw-nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#insights">Insights</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="/contact" class="fw-btn fw-btn-primary">Client Portal</a>
+  </div>
+</nav>
+
+<!-- ========================================== -->
+<!-- 2. HERO SECTION -->
+<!-- ========================================== -->
+<section class="fw-section-hero" style="background: var(--fw-warm-50); position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden;">
+  <div style="position: absolute; inset: 0; z-index: 0; background: url('/wp-content/uploads/hero-architecture.jpg') center center / cover no-repeat;"></div>
+  <div style="position: absolute; inset: 0; z-index: 1; background: linear-gradient(135deg, rgba(247,245,240,0.92) 0%, rgba(247,245,240,0.75) 45%, rgba(247,245,240,0.3) 100%);"></div>
+  <div class="fw-container" style="position: relative; z-index: 2; max-width: 780px;">
+    <div style="display: flex; align-items: center; gap: var(--fw-space-4); margin-bottom: var(--fw-space-6);">
+      <span style="width: 48px; height: 1px; background: var(--fw-ocean-500);"></span>
+      <span class="fw-label" style="color: var(--fw-ocean-800);">Financial Management</span>
+    </div>
+    <h1 class="fw-font-serif fw-text-display fw-text-charcoal" style="margin-bottom: var(--fw-space-6); font-style: normal;">
+      Warmth in precision.<br><em style="font-style: italic; color: var(--fw-ocean-600);">Clarity in every ledger.</em>
+    </h1>
+    <p class="fw-text-md fw-text-soft" style="max-width: 560px; margin-bottom: var(--fw-space-8);">
+      We steward wealth with the rigor of an institution and the empathy of a trusted partner. 
+      From individual tax filing to multi-generational family office architecture.
+    </p>
+    <div style="display: flex; gap: var(--fw-space-4); flex-wrap: wrap;">
+      <a href="#services" class="fw-btn fw-btn-primary fw-btn-large">Explore Services</a>
+      <a href="/contact" class="fw-btn fw-btn-secondary fw-btn-large">Schedule a Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- 3. THREE PILLARS (Traffic Director) -->
+<!-- ========================================== -->
+<section class="fw-section" style="background: var(--fw-white);">
+  <div class="fw-container">
+    <div style="max-width: 720px; margin-bottom: var(--fw-space-16);">
+      <p class="fw-label fw-text-muted" style="margin-bottom: var(--fw-space-4);">Our Practice</p>
+      <h2 class="fw-font-serif fw-text-3xl fw-leading-tight" style="margin-bottom: var(--fw-space-4);">
+        Three pillars of financial stewardship.
+      </h2>
+      <p class="fw-text-md fw-text-soft" style="max-width: 560px;">
+        Whether you are filing your first return or managing liquidity across continents, we meet you exactly where you are.
+      </p>
+    </div>
+    <div class="fw-grid-2" style="grid-template-columns: repeat(3, 1fr);">
+      <!-- Tax -->
+      <article class="fw-card" style="padding: var(--fw-space-10);">
+        <div style="width: 56px; height: 56px; border-radius: var(--fw-radius-md); background: var(--fw-ocean-500); display: flex; align-items: center; justify-content: center; margin-bottom: var(--fw-space-6); font-family: var(--fw-serif); font-size: var(--fw-text-xl); color: var(--fw-white);">T</div>
+        <p class="fw-label fw-text-muted" style="margin-bottom: var(--fw-space-4);">Open to All</p>
+        <h3 class="fw-font-serif fw-text-xl fw-text-charcoal" style="margin-bottom: var(--fw-space-3);">Tax Preparation</h3>
+        <p class="fw-text-soft" style="margin-bottom: var(--fw-space-6); line-height: 1.7; flex-grow: 1;">
+          Institutional-grade filing for individuals and families of every background and income level. Accuracy, maximized deductions, and digital document collection.
+        </p>
+        <a href="/tax-preparation" class="fw-btn fw-btn-link">Learn more &rarr;</a>
+      </article>
+      <!-- Accounting -->
+      <article class="fw-card" style="padding: var(--fw-space-10);">
+        <div style="width: 56px; height: 56px; border-radius: var(--fw-radius-md); background: var(--fw-ocean-800); display: flex; align-items: center; justify-content: center; margin-bottom: var(--fw-space-6); font-family: var(--fw-serif); font-size: var(--fw-text-xl); color: var(--fw-white);">A</div>
+        <p class="fw-label fw-text-muted" style="margin-bottom: var(--fw-space-4);">For Growing Entities</p>
+        <h3 class="fw-font-serif fw-text-xl fw-text-charcoal" style="margin-bottom: var(--fw-space-3);">Strategic Accounting</h3>
+        <p class="fw-text-soft" style="margin-bottom: var(--fw-space-6); line-height: 1.7; flex-grow: 1;">
+          Robust bookkeeping, entity structuring, and financial reporting for businesses and individuals building something that lasts.
+        </p>
+        <a href="/accounting" class="fw-btn fw-btn-link">Learn more &rarr;</a>
+      </article>
+      <!-- Business Management -->
+      <article class="fw-card" style="padding: var(--fw-space-10);">
+        <div style="width: 56px; height: 56px; border-radius: var(--fw-radius-md); background: var(--fw-warm-600); display: flex; align-items: center; justify-content: center; margin-bottom: var(--fw-space-6); font-family: var(--fw-serif); font-size: var(--fw-text-xl); color: var(--fw-white);">M</div>
+        <p class="fw-label fw-text-muted" style="margin-bottom: var(--fw-space-4);">High-Touch Advisory</p>
+        <h3 class="fw-font-serif fw-text-xl fw-text-charcoal" style="margin-bottom: var(--fw-space-3);">Business Management</h3>
+        <p class="fw-text-soft" style="margin-bottom: var(--fw-space-6); line-height: 1.7; flex-grow: 1;">
+          An exclusive advisory ecosystem for high-profile individuals and high-net-worth families. Multi-stream revenue and legacy preservation.
+        </p>
+        <a href="/business-management" class="fw-btn fw-btn-link">Explore the ecosystem &rarr;</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- 4. TAX PREPARATION DEEP DIVE (Dark Section) -->
+<!-- ========================================== -->
+<section class="fw-section" style="background: var(--fw-ocean-950); color: var(--fw-white); position: relative; overflow: hidden;">
+  <div style="position: absolute; top: -20%; right: -10%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,139,154,0.15) 0%, transparent 70%); pointer-events: none;"></div>
+  <div style="position: absolute; bottom: -30%; left: -20%; width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(0,74,82,0.4) 0%, transparent 60%); pointer-events: none;"></div>
+  <div class="fw-container" style="position: relative; z-index: 2;">
+    <div class="fw-grid-2">
+      <div>
+        <div style="display: inline-flex; align-items: center; gap: var(--fw-space-2); background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); padding: var(--fw-space-2) var(--fw-space-4); border-radius: var(--fw-radius-full); font-family: var(--fw-label); font-size: var(--fw-text-xs); letter-spacing: 0.08em; margin-bottom: var(--fw-space-6);">
+          <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--fw-ocean-300); margin-right: 4px;"></span>
+          Tax Preparation
+        </div>
+        <h2 class="fw-font-serif fw-text-3xl fw-text-white fw-leading-tight" style="margin-bottom: var(--fw-space-4);">
+          For <em style="font-style: italic;">everyone.</em><br>Without exception.
+        </h2>
+        <p class="fw-text-md" style="color: var(--fw-light); margin-bottom: var(--fw-space-8); line-height: 1.7;">
+          Our institutional-grade tax preparation is not gated by wealth tier. We serve first-time filers, gig-economy professionals, multi-income households, and retirees with the same rigor and human care.
+        </p>
+        <a href="/tax-preparation" class="fw-btn fw-btn-white">Start Your Filing</a>
+        <div style="display: flex; flex-direction: column; gap: var(--fw-space-6); margin-top: var(--fw-space-8);">
+          <div style="display: flex; gap: var(--fw-space-4); align-items: flex-start;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--fw-ocean-300); margin-top: 10px; flex-shrink: 0;"></span>
+            <p style="font-size: var(--fw-text-sm); color: var(--fw-light); line-height: 1.6;">Secure digital document collection — upload from any device, encrypted end-to-end.</p>
+          </div>
+          <div style="display: flex; gap: var(--fw-space-4); align-items: flex-start;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--fw-ocean-300); margin-top: 10px; flex-shrink: 0;"></span>
+            <p style="font-size: var(--fw-text-sm); color: var(--fw-light); line-height: 1.6;">Deduction maximization audit that catches what automated software misses.</p>
+          </div>
+          <div style="display: flex; gap: var(--fw-space-4); align-items: flex-start;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--fw-ocean-300); margin-top: 10px; flex-shrink: 0;"></span>
+            <p style="font-size: var(--fw-text-sm); color: var(--fw-light); line-height: 1.6;">Year-round support, not just seasonal. Ask questions in March or October.</p>
+          </div>
+          <div style="display: flex; gap: var(--fw-space-4); align-items: flex-start;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--fw-ocean-300); margin-top: 10px; flex-shrink: 0;"></span>
+            <p style="font-size: var(--fw-text-sm); color: var(--fw-light); line-height: 1.6;">Transparent flat-fee pricing. No surprise hourly charges, ever.</p>
+          </div>
+        </div>
+      </div>
+      <div style="border-radius: var(--fw-radius-xl); overflow: hidden; position: relative; aspect-ratio: 4/5; background: var(--fw-ocean-800);">
+        <img src="/wp-content/uploads/editorial-still.jpg" alt="Warm editorial workspace" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8; mix-blend-mode: luminosity;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- 5. BUSINESS MANAGEMENT PATHING (4 Cards) -->
+<!-- ========================================== -->
+<section class="fw-section" style="background: var(--fw-warm-100);">
+  <div class="fw-container">
+    <div style="text-align: center; max-width: 720px; margin: 0 auto var(--fw-space-16);">
+      <p class="fw-label fw-text-muted" style="margin-bottom: var(--fw-space-4);">Premium Business Management</p>
+      <h2 class="fw-font-serif fw-text-3xl" style="margin-bottom: var(--fw-space-4);">Which path reflects your life?</h2>
+      <p class="fw-text-md fw-text-soft">Select your archetype below. We have built distinct advisory frameworks for four distinct profiles.</p>
+    </div>
+    <div class="fw-grid-4">
+      <a href="/business-management#elite-performers" class="fw-card" style="text-decoration: none; color: inherit; position: relative; overflow: hidden;">
+        <p style="font-family: var(--fw-label); font-size: var(--fw-text-xs); color: var(--fw-muted); margin-bottom: var(--fw-space-4);">01</p>
+        <h3 class="fw-font-serif fw-text-xl" style="margin-bottom: var(--fw-space-3);">Elite Performers</h3>
+        <p style="font-size: var(--fw-text-sm); color: var(--fw-soft); line-height: 1.7; margin-bottom: var(--fw-space-6); flex-grow: 1;">Athletes, entertainers, and creators managing multi-stream revenue and empire-building transitions.</p>
+        <span style="font-family: var(--fw-label); font-size: var(--fw-text-xs); color: var(--fw-ocean-600); letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: var(--fw-space-2);">Explore &rarr;</span>
+      </a>
+      <a href="/business-management#corporate-leaders" class="fw-card" style="text-decoration: none; color: inherit;">
+        <p style="font-family: var(--fw-label); font-size: var(--fw-text-xs); color: var(--fw-muted); margin-bottom: var(--fw-space-4);">02</p>
+        <h3 class="fw-font-serif fw-text-xl" style="margin-bottom: var(--fw-space-3);">Corporate Leaders</h3>
+        <p style="font-size: var(--fw-text-sm); color: var(--fw-soft); line-height: 1.7; margin-bottom: var(--fw-space-6); flex-grow: 1;">C-Suite executives optimizing equity compensation, RSU vesting, and corporate benefit coordination.</p>
+        <span style="font-family: var(--fw-label); font-size: var(--fw-text-xs); color: var(--fw-ocean-600); letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: var(--fw-space-2);">Explore &rarr;</span>
+      </a>
+      <a href="/business-management#wealth-creators" class="fw-card" style="text-decoration: none; color: inherit;">
+        <p style="font-family: var(--fw-label); font-size: var(--fw-text-xs); color: var(--fw-muted); margin-bottom: var(--fw-space-4);">03</p>
+        <h3 class="fw-font-serif fw-text-xl" style="margin-bottom: var(--fw-space-3);">Wealth Creators</h3>
+        <p style="font-size: var(--fw-text-sm); color: var(--fw-soft); line-height: 1.7; margin-bottom: var(--fw-space-6); flex-grow: 1;">Founders and entrepreneurs navigating business-to-personal transitions and liquidity events.</p>
+        <span style="font-family: var(--fw-label); font-size: var(--fw-text-xs); color: var(--fw-ocean-600); letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: var(--fw-space-2);">Explore &rarr;</span>
+      </a>
+      <a href="/business-management#legacy-planners" class="fw-card" style="text-decoration: none; color: inherit;">
+        <p style="font-family: var(--fw-label); font-size: var(--fw-text-xs); color: var(--fw-muted); margin-bottom: var(--fw-space-4);">04</p>
+        <h3 class="fw-font-serif fw-text-xl" style="margin-bottom: var(--fw-space-3);">Legacy Planners</h3>
+        <p style="font-size: var(--fw-text-sm); color: var(--fw-soft); line-height: 1.7; margin-bottom: var(--fw-space-6); flex-grow: 1;">Multi-generational families preserving wealth across decades and family office dynamics.</p>
+        <span style="font-family: var(--fw-label); font-size: var(--fw-text-xs); color: var(--fw-ocean-600); letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: var(--fw-space-2);">Explore &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- 6. INSIGHTS HUB (Editorial Grid) -->
+<!-- ========================================== -->
+<section class="fw-section" style="background: var(--fw-warm-50);">
+  <div class="fw-container">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--fw-space-12); flex-wrap: wrap; gap: var(--fw-space-4);">
+      <div>
+        <p class="fw-label fw-text-muted" style="margin-bottom: var(--fw-space-4);">Insights Hub</p>
+        <h2 class="fw-font-serif fw-text-3xl fw-leading-tight">Market commentary and institutional perspective.</h2>
+      </div>
+      <a href="/insights" class="fw-btn fw-btn-secondary">View All Insights</a>
+    </div>
+    <div class="fw-grid-3">
+      <a href="/insights" style="background: var(--fw-white); border-radius: var(--fw-radius-lg); border: 1px solid var(--fw-warm-200); overflow: hidden; transition: all var(--fw-duration-base) var(--fw-ease-out); text-decoration: none; color: inherit; display: block;">
+        <div style="aspect-ratio: 16/10; background: var(--fw-warm-200); overflow: hidden;">
+          <img src="/wp-content/uploads/texture-oceanic.jpg" alt="Abstract texture" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div style="padding: var(--fw-space-6);">
+          <p style="font-size: var(--fw-text-xs); color: var(--fw-muted); margin-bottom: var(--fw-space-2);">June 2026</p>
+          <h3 class="fw-font-serif fw-text-md" style="color: var(--fw-charcoal); line-height: 1.3; margin-bottom: var(--fw-space-3);">The Mid-Year Tax Review: Why July Is Your Strategic Window</h3>
+          <p style="font-size: var(--fw-text-sm); color: var(--fw-soft); line-height: 1.6;">Most taxpayers wait until December. By then, the moves that matter are already off the table.</p>
+        </div>
+      </a>
+      <!-- Add more article cards as needed -->
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- 7. CONTACT FORM (Premium) -->
+<!-- ========================================== -->
+<section class="fw-section" style="background: var(--fw-white);">
+  <div class="fw-container">
+    <div class="fw-grid-2">
+      <div style="background: var(--fw-white); border-radius: var(--fw-radius-xl); border: 1px solid var(--fw-warm-200); padding: var(--fw-space-12); box-shadow: var(--fw-shadow-xl);">
+        <p class="fw-label fw-text-muted" style="margin-bottom: var(--fw-space-6);">New Client Inquiry</p>
+        <h2 class="fw-font-serif fw-text-xl" style="margin-bottom: var(--fw-space-8); line-height: 1.2;">Tell us about your situation.</h2>
+        <form>
+          <div class="fw-grid-2" style="gap: var(--fw-space-4);">
+            <div class="fw-form-group"><label class="fw-form-label">First Name</label><input type="text" class="fw-form-input" placeholder="Jane" required></div>
+            <div class="fw-form-group"><label class="fw-form-label">Last Name</label><input type="text" class="fw-form-input" placeholder="Doe" required></div>
+          </div>
+          <div class="fw-form-group"><label class="fw-form-label">Email Address</label><input type="email" class="fw-form-input" placeholder="jane@company.com" required></div>
+          <div class="fw-form-group"><label class="fw-form-label">Phone Number</label><input type="tel" class="fw-form-input" placeholder="(555) 123-4567"></div>
+          <div class="fw-form-group"><label class="fw-form-label">I am interested in</label><select class="fw-form-input" required><option value="" disabled selected>Select a service area</option><option>Tax Preparation</option><option>Strategic Accounting</option><option>Business Management</option><option>Family Office / Legacy Planning</option><option>General Consultation</option></select></div>
+          <div class="fw-form-group"><label class="fw-form-label">Tell us more</label><textarea class="fw-form-input" placeholder="Describe your situation..."></textarea></div>
+          <label class="fw-form-check" style="margin-bottom: var(--fw-space-6);"><input type="checkbox" required><span>I agree to the privacy policy...</span></label>
+          <button type="submit" class="fw-btn fw-btn-primary fw-btn-large" style="width: 100%;">Submit Secure Inquiry</button>
+        </form>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--fw-space-10);">
+        <div style="padding: var(--fw-space-8); background: var(--fw-warm-50); border-radius: var(--fw-radius-lg); border: 1px solid var(--fw-warm-200);">
+          <p class="fw-label fw-text-muted" style="margin-bottom: var(--fw-space-3);">Direct Line</p>
+          <p class="fw-font-serif fw-text-xl" style="margin-bottom: var(--fw-space-2);">(555) 123-4567</p>
+          <p style="font-size: var(--fw-text-sm); color: var(--fw-soft); line-height: 1.6;">Available Monday through Friday, 8:00 AM to 6:00 PM EST.</p>
+        </div>
+        <div style="padding: var(--fw-space-8); background: var(--fw-warm-50); border-radius: var(--fw-radius-lg); border: 1px solid var(--fw-warm-200);">
+          <p class="fw-label fw-text-muted" style="margin-bottom: var(--fw-space-3);">Email</p>
+          <p class="fw-font-serif fw-text-xl" style="margin-bottom: var(--fw-space-2);">hello@folkwilliams.com</p>
+          <p style="font-size: var(--fw-text-sm); color: var(--fw-soft); line-height: 1.6;">We respond to all inquiries within one business day.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- 8. CLIENT PORTAL LINKS (Schwab / Fidelity) -->
+<!-- ========================================== -->
+<section class="fw-section" style="background: var(--fw-warm-50);">
+  <div class="fw-container">
+    <div class="fw-grid-3" style="text-align: center;">
+      <a href="https://www.schwab.com" target="_blank" rel="noopener" class="fw-card" style="align-items: center; text-decoration: none; color: inherit;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--fw-ocean-50); display: flex; align-items: center; justify-content: center; margin-bottom: var(--fw-space-6); font-family: var(--fw-serif); font-size: var(--fw-text-xl); color: var(--fw-ocean-600);">S</div>
+        <h3 class="fw-font-serif fw-text-lg" style="margin-bottom: var(--fw-space-3);">Charles Schwab</h3>
+        <p style="font-size: var(--fw-text-sm); color: var(--fw-soft); line-height: 1.6; margin-bottom: var(--fw-space-6);">Access your managed accounts and review positions through our Schwab integration.</p>
+        <span class="fw-btn fw-btn-secondary" style="font-size: var(--fw-text-xs); padding: var(--fw-space-2) var(--fw-space-4);">Log In</span>
+      </a>
+      <a href="https://www.fidelity.com" target="_blank" rel="noopener" class="fw-card" style="align-items: center; text-decoration: none; color: inherit;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--fw-ocean-50); display: flex; align-items: center; justify-content: center; margin-bottom: var(--fw-space-6); font-family: var(--fw-serif); font-size: var(--fw-text-xl); color: var(--fw-ocean-600);">F</div>
+        <h3 class="fw-font-serif fw-text-lg" style="margin-bottom: var(--fw-space-3);">Fidelity</h3>
+        <p style="font-size: var(--fw-text-sm); color: var(--fw-soft); line-height: 1.6; margin-bottom: var(--fw-space-6);">Review retirement accounts, brokerage holdings, and tax-advantaged accounts.</p>
+        <span class="fw-btn fw-btn-secondary" style="font-size: var(--fw-text-xs); padding: var(--fw-space-2) var(--fw-space-4);">Log In</span>
+      </a>
+      <a href="#" class="fw-card" style="align-items: center; text-decoration: none; color: inherit;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--fw-ocean-50); display: flex; align-items: center; justify-content: center; margin-bottom: var(--fw-space-6); font-family: var(--fw-serif); font-size: var(--fw-text-xl); color: var(--fw-ocean-600);">D</div>
+        <h3 class="fw-font-serif fw-text-lg" style="margin-bottom: var(--fw-space-3);">Document Collection</h3>
+        <p style="font-size: var(--fw-text-sm); color: var(--fw-soft); line-height: 1.6; margin-bottom: var(--fw-space-6);">Upload tax documents and statements through our bank-grade encrypted portal.</p>
+        <span class="fw-btn fw-btn-secondary" style="font-size: var(--fw-text-xs); padding: var(--fw-space-2) var(--fw-space-4);">Upload</span>
+      </a>
+    </div>
+  </div>
+</section>

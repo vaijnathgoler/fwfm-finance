@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Folk Williams Financial Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--o-50:#E8F4F5;--o-100:#C5E2E5;--o-200:#9ECFD4;--o-300:#76BBC2;--o-400:#58AAB3;--o-500:#0097A7;--o-600:#00838F;--o-700:#006F7A;--o-800:#005A63;--o-900:#00464D;--o-950:#002529;--w-50:#FDFCFA;--w-100:#F7F5F0;--w-200:#F0EBE0;--w-300:#E8DFD0;--w-400:#D4C8B5;--w-500:#B5A58C;--w-600:#9A8B73;--w-700:#7A6D5A;--w-800:#5C5243;--c-900:#0D1117;--c-800:#161B22;--c-700:#4A5568;--c-600:#6B7280;--c-500:#9CA3AF;--c-400:#E5E7EB;--white:#FFFFFF;--fd:'Cormorant Garamond',Georgia,serif;--fb:'Inter',system-ui,sans-serif;--fm:'Space Grotesk',monospace;--ease:cubic-bezier(0.22,1,0.36,1);}
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+  body{font-family:var(--fb);font-size:15px;line-height:1.65;color:var(--c-900);background:var(--white);overflow-x:hidden;font-weight:400}
+  img{max-width:100%;height:auto;display:block}
+  a{text-decoration:none;color:inherit}
+  ul{list-style:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+  .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 48px;height:84px;display:flex;align-items:center;justify-content:space-between;transition:all 0.6s var(--ease);border-bottom:1px solid transparent;background:rgba(255,255,255,0.92);backdrop-filter:blur(24px) saturate(180%);box-shadow:0 1px 0 rgba(0,0,0,0.04)}
+  .nav.scrolled{height:72px;border-bottom-color:var(--c-400)}
+  .nav-logo{display:flex;align-items:center;gap:16px}
+  .nav-logo img{height:44px;width:auto;display:block}
+  .nav-logo span{font-family:var(--fd);font-size:26px;font-weight:500;letter-spacing:-0.01em;color:var(--c-900);line-height:1}
+  .nav-links{display:flex;align-items:center;gap:48px}
+  .nav-links a{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--c-900);padding:8px 0;position:relative;transition:color 0.3s ease}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--o-600);transition:width 0.5s var(--ease)}
+  .nav-links a:hover{color:var(--o-700)} .nav-links a:hover::after{width:100%}
+  .nav-cta{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:14px 32px;border:2px solid var(--c-900);border-radius:100px;color:var(--c-900);transition:all 0.4s var(--ease);background:transparent;line-height:1}
+  .nav-cta:hover{background:var(--c-900);color:var(--white);border-color:var(--c-900);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer;z-index:1001}
+  .nav-toggle span{display:block;width:26px;height:2px;background:var(--c-900);transition:all 0.4s var(--ease);border-radius:1px}
+  .nav-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.active span:nth-child(2){opacity:0;transform:scaleX(0)}
+  .nav-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mob-overlay{position:fixed;inset:0;z-index:999;background:var(--w-50);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;opacity:0;pointer-events:none;transition:opacity 0.5s var(--ease)}
+  .mob-overlay.active{opacity:1;pointer-events:auto}
+  .mob-overlay a{font-family:var(--fd);font-size:36px;font-weight:500;color:var(--c-900);letter-spacing:-0.01em;transition:color 0.3s}
+  .mob-overlay a:hover{color:var(--o-600)}
+  .mob-overlay .nav-cta{margin-top:20px;font-size:14px;padding:16px 40px}
+
+  .page-hero{position:relative;width:100%;padding:220px 48px 160px;background:var(--o-950);color:var(--white);overflow:hidden;text-align:center}
+  .page-hero-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,151,167,0.15) 0%,transparent 60%);pointer-events:none}
+  .page-hero-grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+  .page-hero-content{position:relative;z-index:2;max-width:900px;margin:0 auto}
+  .page-hero-label{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--o-300);margin-bottom:36px;display:flex;align-items:center;justify-content:center;gap:16px}
+  .page-hero-label::before,.page-hero-label::after{content:'';width:48px;height:2px;background:var(--o-500)}
+  .page-hero-title{font-family:var(--fd);font-size:clamp(52px,9vw,120px);font-weight:500;line-height:0.92;letter-spacing:-0.03em;margin-bottom:36px;text-wrap:balance}
+  .page-hero-title em{font-style:italic;font-weight:400;color:var(--o-200)}
+  .page-hero-sub{font-family:var(--fb);font-size:clamp(15px,1.3vw,18px);font-weight:400;color:var(--c-500);max-width:620px;margin:0 auto;line-height:1.7;text-wrap:pretty}
+
+  .contact{padding:0 48px 160px;background:var(--white);position:relative}
+  .contact-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:100px;align-items:start}
+  .form-card{background:var(--white);border-radius:2px;border:2px solid var(--w-200);padding:80px 64px;box-shadow:0 24px 80px rgba(0,0,0,0.06);position:relative;z-index:2;margin-top:-80px}
+  .form-label{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-600);margin-bottom:48px;display:block}
+  .form-title{font-family:var(--fd);font-size:36px;font-weight:500;line-height:1.1;letter-spacing:-0.01em;margin-bottom:48px}
+  .form-group{margin-bottom:32px}
+  .form-field-label{display:block;font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--c-600);margin-bottom:10px}
+  .form-input{width:100%;padding:14px 16px;border:2px solid var(--w-200);border-radius:2px;font-family:var(--fb);font-size:15px;color:var(--c-900);background:var(--white);transition:all 0.3s ease;outline:none;line-height:1.5}
+  .form-input:focus{border-color:var(--o-400);box-shadow:0 0 0 4px rgba(0,151,167,0.06)}
+  .form-input::placeholder{color:var(--c-500)}
+  textarea.form-input{min-height:140px;resize:vertical;line-height:1.6}
+  select.form-input{color:var(--c-600);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+  .form-check{display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-size:14px;font-weight:400;color:var(--c-700);line-height:1.5;margin-bottom:32px}
+  .form-check input{width:18px;height:18px;border:2px solid var(--w-200);border-radius:2px;accent-color:var(--o-600);cursor:pointer;margin-top:2px;flex-shrink:0}
+  .form-submit{width:100%;padding:18px 32px;font-family:var(--fm);font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;background:var(--c-900);color:var(--white);border:none;border-radius:100px;cursor:pointer;transition:all 0.5s var(--ease);line-height:1}
+  .form-submit:hover{transform:translateY(-2px);box-shadow:0 20px 48px rgba(0,0,0,0.15);background:var(--c-800)}
+  .form-security{display:flex;align-items:center;gap:8px;margin-top:24px;font-size:13px;color:var(--c-600)}
+  .form-security svg{width:16px;height:16px;color:var(--o-600);flex-shrink:0}
+
+  .info{display:flex;flex-direction:column;gap:56px;padding-top:48px}
+  .info-card{padding:0;border:none;background:transparent}
+  .info-label{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-600);margin-bottom:14px}
+  .info-value{font-family:var(--fd);font-size:30px;font-weight:500;line-height:1.2;color:var(--c-900);margin-bottom:10px;letter-spacing:-0.01em}
+  .info-desc{font-family:var(--fb);font-size:15px;font-weight:400;color:var(--c-700);line-height:1.6}
+  .info-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--o-600);transition:gap 0.4s}
+  .info-link:hover{gap:14px}
+  .info-dark{padding:44px;background:var(--o-950);border-radius:2px;color:var(--white)}
+  .info-dark .info-label{color:var(--o-300)}
+  .info-dark .info-value{color:var(--white);font-size:26px}
+  .info-dark .info-desc{color:var(--c-500)}
+  .info-dark .info-link{color:var(--o-200)}
+
+  .portals{padding:0 48px 160px;background:var(--w-100)}
+  .portals-inner{max-width:1200px;margin:0 auto;text-align:center}
+  .portals-header{margin-bottom:100px;max-width:600px;margin-left:auto;margin-right:auto}
+  .portals-label{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-600);margin-bottom:24px}
+  .portals-title{font-family:var(--fd);font-size:clamp(36px,4.5vw,64px);font-weight:500;line-height:1.05;letter-spacing:-0.02em;margin-bottom:24px}
+  .portals-title em{font-style:italic;font-weight:400;color:var(--o-700)}
+  .portals-sub{font-family:var(--fb);font-size:16px;font-weight:400;color:var(--c-700);line-height:1.7}
+  .portals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .portal-card{background:var(--white);border-radius:2px;border:2px solid var(--w-200);padding:64px 40px;transition:all 0.5s var(--ease);text-align:center;display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--c-900)}
+  .portal-card:hover{border-color:var(--o-200);transform:translateY(-6px);box-shadow:0 30px 80px rgba(0,0,0,0.08)}
+  .portal-icon{width:72px;height:72px;border-radius:50%;background:var(--o-50);display:flex;align-items:center;justify-content:center;margin-bottom:32px;font-family:var(--fd);font-size:32px;color:var(--o-600);font-weight:500}
+  .portal-title{font-family:var(--fd);font-size:26px;font-weight:500;margin-bottom:16px;letter-spacing:-0.01em}
+  .portal-desc{font-family:var(--fb);font-size:15px;font-weight:400;color:var(--c-700);line-height:1.6;margin-bottom:32px;flex-grow:1}
+  .portal-btn{padding:12px 28px;font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;border:2px solid var(--w-200);border-radius:100px;color:var(--c-900);text-decoration:none;transition:all 0.4s}
+  .portal-btn:hover{border-color:var(--o-600);color:var(--o-600);background:var(--o-50)}
+
+  .cta-section{padding:200px 48px;text-align:center;background:var(--white);position:relative}
+  .cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(0,151,167,0.06) 0%,transparent 60%);pointer-events:none}
+  .cta-inner{position:relative;z-index:2;max-width:700px;margin:0 auto}
+  .cta-label{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--c-600);margin-bottom:32px}
+  .cta-title{font-family:var(--fd);font-size:clamp(40px,5.5vw,72px);font-weight:500;line-height:1.0;letter-spacing:-0.02em;margin-bottom:32px;text-wrap:balance}
+  .cta-title em{font-style:italic;font-weight:400;color:var(--o-700)}
+  .cta-body{font-family:var(--fb);font-size:16px;font-weight:400;color:var(--c-700);max-width:520px;margin:0 auto 48px;line-height:1.7}
+  .cta-btn{display:inline-flex;align-items:center;gap:14px;font-family:var(--fm);font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:20px 48px;background:var(--c-900);color:var(--white);border-radius:100px;transition:all 0.5s var(--ease);border:2px solid var(--c-900);line-height:1}
+  .cta-btn:hover{transform:translateY(-3px);box-shadow:0 20px 48px rgba(0,0,0,0.15);background:var(--c-800)}
+
+  .footer{padding:140px 48px 64px;background:var(--c-900);color:var(--c-500)}
+  .footer-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:100px;margin-bottom:100px}
+  .footer-brand{max-width:340px}
+  .footer-logo{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .footer-logo img{height:40px;width:auto}
+  .footer-logo-text{font-family:var(--fd);font-size:24px;font-weight:500;color:var(--white);letter-spacing:-0.01em}
+  .footer-desc{font-family:var(--fb);font-size:15px;font-weight:400;line-height:1.7;color:var(--c-600)}
+  .footer-col-title{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);margin-bottom:28px}
+  .footer-col-links{display:flex;flex-direction:column;gap:14px}
+  .footer-col-links a{font-family:var(--fb);font-size:15px;font-weight:400;color:var(--c-600);transition:color 0.3s}
+  .footer-col-links a:hover{color:var(--white)}
+  .footer-bottom{max-width:1400px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.08);padding-top:40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+  .footer-legal{font-family:var(--fb);font-size:13px;color:var(--c-600)}
+  .footer-legal a{color:var(--c-600);text-decoration:none;margin-left:28px;transition:color 0.3s}
+  .footer-legal a:hover{color:var(--white)}
+
+  .rv{opacity:0;transform:translateY(60px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+  .rv.vis{opacity:1;transform:translateY(0)}
+  .rv-d1{transition-delay:0.12s} .rv-d2{transition-delay:0.24s} .rv-d3{transition-delay:0.36s} .rv-d4{transition-delay:0.48s}
+  .rv-s{opacity:0;transform:scale(0.96);transition:opacity 1.2s var(--ease),transform 1.2s var(--ease)}
+  .rv-s.vis{opacity:1;transform:scale(1)}
+  .rv-l{opacity:0;transform:translateX(-50px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  .rv-l.vis{opacity:1;transform:translateX(0)}
+  .rv-r{opacity:0;transform:translateX(50px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  .rv-r.vis{opacity:1;transform:translateX(0)}
+
+  @media(max-width:1024px){
+    .nav{padding:0 32px;height:76px} .nav.scrolled{height:68px} .nav-links,.nav-cta{display:none} .nav-toggle{display:flex}
+    .page-hero{padding:160px 32px 100px} .contact{padding:0 32px 100px} .contact-inner{grid-template-columns:1fr;gap:60px}
+    .form-card{margin-top:0;padding:48px 32px} .info{padding-top:0} .portals{padding:0 32px 100px} .portals-grid{grid-template-columns:1fr;gap:24px}
+    .cta-section{padding:120px 32px} .footer{padding:100px 32px 48px} .footer-grid{grid-template-columns:1fr 1fr;gap:60px}
+  }
+  @media(max-width:640px){
+    .nav{padding:0 24px;height:72px} .nav-logo img{height:36px} .nav-logo span{font-size:22px}
+    .page-hero{padding:140px 24px 80px} .page-hero-title{font-size:clamp(40px,12vw,52px)} .page-hero-sub{font-size:15px}
+    .contact{padding:0 24px 80px} .form-card{padding:40px 24px} .form-title{font-size:28px}
+    .portals{padding:0 24px 80px} .portal-card{padding:48px 32px} .portal-icon{width:60px;height:60px;font-size:28px}
+    .cta-section{padding:100px 24px} .cta-title{font-size:clamp(36px,9vw,44px)} .cta-btn{padding:16px 32px}
+    .footer{padding:80px 24px 40px} .footer-grid{grid-template-columns:1fr;gap:48px} .footer-bottom{flex-direction:column;align-items:flex-start;gap:16px} .footer-legal a{margin-left:0;margin-right:20px}
+  }
+  @media(prefers-reduced-motion:reduce){.rv,.rv-s,.rv-l,.rv-r{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo"><img src="../images/logo-original.jpg" alt="Folk Williams"><span>Folk Williams</span></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="tax-preparation.html">Tax</a></li><li><a href="accounting.html">Accounting</a></li><li><a href="business-management.html">Business</a></li><li><a href="insights.html">Insights</a></li></ul>
+  <a href="contact.html" class="nav-cta">Client Portal</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-overlay" id="mobOverlay">
+  <a href="index.html">Home</a><a href="tax-preparation.html">Tax</a><a href="accounting.html">Accounting</a><a href="business-management.html">Business</a><a href="insights.html">Insights</a>
+  <a href="contact.html" class="nav-cta">Client Portal</a>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="page-hero-grain"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-label rv">Contact</p>
+    <h1 class="page-hero-title rv rv-d1">Begin the<br><em>conversation.</em></h1>
+    <p class="page-hero-sub rv rv-d2">We will respond within one business day. Whether you are filing a single return, restructuring an entity, or designing a family office, the first step is a simple conversation.</p>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="contact-inner">
+    <div class="form-card rv-s">
+      <p class="form-label">New Client Inquiry</p>
+      <h2 class="form-title">Tell us about your situation.</h2>
+      <form onsubmit="event.preventDefault();alert('Thank you. We have received your inquiry and will respond within one business day.');">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px">
+          <div class="form-group"><label class="form-field-label">First Name</label><input type="text" class="form-input" placeholder="Jane" required></div>
+          <div class="form-group"><label class="form-field-label">Last Name</label><input type="text" class="form-input" placeholder="Doe" required></div>
+        </div>
+        <div class="form-group"><label class="form-field-label">Email Address</label><input type="email" class="form-input" placeholder="jane@company.com" required></div>
+        <div class="form-group"><label class="form-field-label">Phone Number</label><input type="tel" class="form-input" placeholder="(555) 123-4567"></div>
+        <div class="form-group"><label class="form-field-label">I am interested in</label><select class="form-input" required><option value="" disabled selected>Select a service area</option><option>Tax Preparation</option><option>Strategic Accounting</option><option>Business Management</option><option>Family Office / Legacy Planning</option><option>General Consultation</option></select></div>
+        <div class="form-group"><label class="form-field-label">Tell us more</label><textarea class="form-input" placeholder="Describe your situation, timeline, and any specific goals or concerns..."></textarea></div>
+        <label class="form-check"><input type="checkbox" required><span>I agree to the privacy policy and understand that this form is for initial inquiries only, not document submission.</span></label>
+        <button type="submit" class="form-submit">Submit Secure Inquiry</button>
+        <div class="form-security">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>End-to-end encrypted. Your data is never stored in plain text.</span>
+        </div>
+      </form>
+    </div>
+    <div class="info rv-r">
+      <div class="info-card">
+        <p class="info-label">Direct Line</p>
+        <p class="info-value">(555) 123-4567</p>
+        <p class="info-desc">Available Monday through Friday, 8:00 AM to 6:00 PM EST. For urgent matters, ask for the on-call advisor.</p>
+        <a href="tel:+15551234567" class="info-link">Call now →</a>
+      </div>
+      <div class="info-card">
+        <p class="info-label">Email</p>
+        <p class="info-value">hello@folkwilliams.com</p>
+        <p class="info-desc">We respond to all inquiries within one business day. For document submission, use the secure portal below.</p>
+        <a href="mailto:hello@folkwilliams.com" class="info-link">Send email →</a>
+      </div>
+      <div class="info-card">
+        <p class="info-label">Office</p>
+        <p class="info-value">New York · Remote</p>
+        <p class="info-desc">While we maintain a presence in Manhattan, most advisory work is conducted via secure video conference.</p>
+        <a href="#" class="info-link">Schedule a visit →</a>
+      </div>
+      <div class="info-card info-dark">
+        <p class="info-label">Existing Clients</p>
+        <p class="info-value">Secure Document Upload</p>
+        <p class="info-desc">For tax documents, K-1s, and financial statements, please use our encrypted portal rather than email.</p>
+        <a href="#" class="info-link">Access Portal →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="portals">
+  <div class="portals-inner">
+    <div class="portals-header">
+      <p class="portals-label rv">Client Access</p>
+      <h2 class="portals-title rv rv-d1">Secure portal<br><em>integrations.</em></h2>
+      <p class="portals-sub rv rv-d2">We integrate with leading custodians and collection platforms to ensure your data is secure, accessible, and never compromised.</p>
+    </div>
+    <div class="portals-grid">
+      <a href="https://www.schwab.com" target="_blank" rel="noopener" class="portal-card rv">
+        <div class="portal-icon">S</div>
+        <h3 class="portal-title">Charles Schwab</h3>
+        <p class="portal-desc">Access your managed accounts, review positions, and coordinate advisor notes through our Schwab integration.</p>
+        <span class="portal-btn">Log In</span>
+      </a>
+      <a href="https://www.fidelity.com" target="_blank" rel="noopener" class="portal-card rv rv-d1">
+        <div class="portal-icon">F</div>
+        <h3 class="portal-title">Fidelity</h3>
+        <p class="portal-desc">Review retirement accounts, brokerage holdings, and tax-advantaged accounts linked to our advisory services.</p>
+        <span class="portal-btn">Log In</span>
+      </a>
+      <a href="#" class="portal-card rv rv-d2">
+        <div class="portal-icon">D</div>
+        <h3 class="portal-title">Document Collection</h3>
+        <p class="portal-desc">Upload tax documents and financial statements through our bank-grade encrypted file collection system.</p>
+        <span class="portal-btn">Upload</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <p class="cta-label rv">Not Sure Where to Start?</p>
+    <h2 class="cta-title rv rv-d1">We will guide you to<br>the <em>right service.</em></h2>
+    <p class="cta-body rv rv-d2">If you are unsure whether you need tax preparation, accounting, or full business management, schedule a free 15-minute diagnostic call. We will point you in the right direction — even if that direction is not us.</p>
+    <a href="#" class="cta-btn rv rv-d3" onclick="event.preventDefault();alert('Our scheduling calendar opens in a new secure window. We will be in touch shortly.');">Book a 15-Minute Diagnostic</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><img src="../images/logo-original.jpg" alt="Folk Williams"><span class="footer-logo-text">Folk Williams</span></div>
+      <p class="footer-desc">Premier financial management for individuals, growing entities, and high-net-worth families. Warmth in precision. Clarity in every ledger.</p>
+    </div>
+    <div class="footer-col"><p class="footer-col-title">Services</p><div class="footer-col-links"><a href="tax-preparation.html">Tax Preparation</a><a href="accounting.html">Strategic Accounting</a><a href="business-management.html">Business Management</a><a href="contact.html">Family Office</a></div></div>
+    <div class="footer-col"><p class="footer-col-title">Resources</p><div class="footer-col-links"><a href="insights.html">Insights Hub</a><a href="contact.html">Client Portal</a><a href="contact.html">Document Collection</a><a href="https://www.schwab.com" target="_blank">Schwab Access</a></div></div>
+    <div class="footer-col"><p class="footer-col-title">Contact</p><div class="footer-col-links"><a href="contact.html">Schedule a Call</a><a href="mailto:hello@folkwilliams.com">hello@folkwilliams.com</a><a href="tel:+15551234567">(555) 123-4567</a></div></div>
+  </div>
+  <div class="footer-bottom"><p class="footer-legal">© 2026 Folk Williams Financial Management. All rights reserved.</p><p class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></p></div>
+</footer>
+
+<script>
+  const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:0.08,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.rv,.rv-s,.rv-l,.rv-r').forEach(el=>obs.observe(el));
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{if(window.scrollY>80)nav.classList.add('scrolled');else nav.classList.remove('scrolled')},{passive:true});
+  const toggle=document.getElementById('navToggle');
+  const overlay=document.getElementById('mobOverlay');
+  toggle.addEventListener('click',()=>{toggle.classList.toggle('active');overlay.classList.toggle('active');document.body.style.overflow=overlay.classList.contains('active')?'hidden':''});
+  overlay.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{toggle.classList.remove('active');overlay.classList.remove('active');document.body.style.overflow=''}));
+</script>
+</body>
+</html>
